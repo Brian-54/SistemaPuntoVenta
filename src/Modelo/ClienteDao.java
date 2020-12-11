@@ -104,4 +104,24 @@ public class ClienteDao {
             }
         }
     }
+    
+    public Cliente BuscarCliente(int dni){
+        Cliente cl=new Cliente();
+        String slq="SELECT * FROM clientes WHERE dni=?";
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(slq);
+            ps.setInt(1, dni);
+            rs = ps.executeQuery();
+            if(rs.next()){
+               cl.setNombre(rs.getString("nombre"));
+               cl.setTelefono(rs.getInt("Telefono"));
+               cl.setDireccion(rs.getString("direccion"));
+               cl.setDireccion(rs.getString("razon"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return cl;
+    }
 }
