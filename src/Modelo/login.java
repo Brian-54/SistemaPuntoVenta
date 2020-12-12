@@ -1,6 +1,6 @@
 
 package Modelo;
-
+//Encapsulamiento de variables en clase login
 public class login {
     private int id;
     private String nombre;
