@@ -7,23 +7,31 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LoginDAO {
+    //Declaramos la varible con de tipo Connection
     Connection con;
+    //Declaramos la varible ps de tipo PreparedStatement
     PreparedStatement ps;
+    //Declaramos la varible rs de tipo ResultSet
     ResultSet rs;
-    Conexion cn;
-    login l;
+    //Instanciación de objetos
+    Conexion cn = new Conexion();;
+    login l = new login();
     
-    public login log(String correo,String pass){
-        l = new login();
-        cn=new Conexion();
-        String sql = "Select * from usuarios WHERE correo= ? AND pass = ?";
+    public login log(String correo,String pass){ 
+        String sql = "SELECT * FROM usuarios WHERE correo= ? AND pass = ?";  
         try {    
+            //la variable con recibe la conexion
             con=cn.getConnection();
-            ps = con.prepareStatement(sql);
+            //la variable ps recibe la consulta
+            ps = con.prepareStatement(sql);    
+            //Los campos a buscar
             ps.setString(1,correo);
             ps.setString(2,pass);
+            //Ejecuccion de query
             rs=ps.executeQuery();
+            //Si la siguiente fila no es null significa que existe,ya que el rs se coloca antes de la primera fila
             if(rs.next()){
+            //Los datos que se obtengan se guardaran en el objeto l
                 l.setId(rs.getInt("id"));
                 l.setNombre(rs.getString("nombre"));
                 l.setCorreo(rs.getString("correo"));
@@ -32,6 +40,7 @@ public class LoginDAO {
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
+        //Retornamos objeto
         return l;
     }  
 }

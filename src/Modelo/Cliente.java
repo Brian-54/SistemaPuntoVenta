@@ -1,6 +1,6 @@
 
 package Modelo;
-
+//Encapsulamiento de variables en clase Cliente
 public class Cliente {
     private int id;
     private int dni;

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 import Modelo.LoginDAO;
@@ -11,31 +7,40 @@ import javax.swing.JOptionPane;
 
 
 public class Login extends javax.swing.JFrame {
+    //Intanciamos de objetos clase login y LonginDao
     login lg= new login();
     LoginDAO login = new LoginDAO();
     
     public Login() {
         initComponents();
+        //No se prodra maximizar la pantalla
         setResizable(false);
+        //Ventana centrada
         this.setLocationRelativeTo(null);
     }
-    
+   //Creamos metodo validar
    public void validar(){
+       //almacenamos correo, y en password convertimos de char[] a una cadena string
        String correo=txtCorreo.getText();
        String pass=String.valueOf(txtPass.getPassword());
+       //Validamos que no esten vacios los campos en caso dado mandamos mensaje de error
        if(!"".equals(correo) || !"".equals(pass)){
+       //El resultado se almacena en la variable lg
            lg=login.log(correo, pass);
-            if(lg.getCorreo() != null && lg.getPass() !=null){
+       //Si los dos resultados son diferentes de null entramos al sistema en caso contrario marcara error   
+            if(lg.getCorreo() != null && lg.getPass() != null){
+       //Se intancia el objeto y lo hacemos visible
                    Sistema sis=new Sistema();
                    sis.setVisible(true);
+       //Ocultamos login
                    dispose();
-            }else{
+            }else{        
                 JOptionPane.showMessageDialog(null, "Correo o la contraseña incorrecta");
             }
+       }else{
+           JOptionPane.showMessageDialog(null, "Rellené campos");
        }
    }
-   
-   
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -232,6 +237,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPassActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+        //Llamamos al metodo validar
         validar();
     }//GEN-LAST:event_btnIniciarActionPerformed
 
