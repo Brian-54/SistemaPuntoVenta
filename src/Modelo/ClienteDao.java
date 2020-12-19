@@ -131,9 +131,9 @@ public class ClienteDao {
             rs = ps.executeQuery();
             if(rs.next()){
                cl.setNombre(rs.getString("nombre"));
-               cl.setTelefono(rs.getInt("Telefono"));
+               cl.setTelefono(rs.getInt("telefono"));
                cl.setDireccion(rs.getString("direccion"));
-               cl.setDireccion(rs.getString("razon"));
+               cl.setRazon(rs.getString("razon"));
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
